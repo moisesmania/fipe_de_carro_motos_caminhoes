@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Consulta FIPE - Flask</title>
+  <style>
+    body { font-family: Arial; background: #f4f4f4; padding: 20px; color: #333; }
+    h1 { text-align: center; color: #2c3e50; }
+    label { font-weight: bold; }
+    select, button { padding: 5px; margin: 5px 0; }
+    .resultado { margin-top: 20px; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); width: 300px; }
+    .container { display: flex; flex-direction: column; align-items: center; }
+  </style>
+</head>
+<body>
+  <h1>Consulta de Veículos - Tabela FIPE</h1>
+  <div class="container">
+    <form method="POST">
+      <label>Tipo de Veículo:</label>
+      <select name="tipo" onchange="this.form.submit()">
+        <option value="">Selecione</option>
+        <option value="carros" {% if tipo=='carros' %}selected{% endif %}>Carros</option>
+        <option value="motos" {% if tipo=='motos' %}selected{% endif %}>Motos</option>
+        <option value="caminhoes" {% if tipo=='caminhoes' %}selected{% endif %}>Caminhões</option>
+      </select>
+
+      <label>Marca:</label>
+      <select name="marca" onchange="this.form.submit()">
+        <option value="">Selecione</option>
+        {% for m in marcas %}
+          <option value="{{ m.codigo }}" {% if marca==m.codigo|string %}selected{% endif %}>{{ m.nome }}</option>
+        {% endfor %}
+      </select>
+
+      <label>Modelo:</label>
+      <select name="modelo" onchange="this.form.submit()">
+        <option value="">Selecione</option>
+        {% for m in modelos %}
+          <option value="{{ m.codigo }}" {% if modelo==m.codigo|string %}selected{% endif %}>{{ m.nome }}</option>
+        {% endfor %}
+      </select>
+
+      <label>Ano:</label>
+      <select name="ano" onchange="this.form.submit()">
+        <option value="">Selecione</option>
+        {% for a in anos %}
+          <option value="{{ a.codigo }}" {% if ano==a.codigo|string %}selected{% endif %}>{{ a.nome }}</option>
+        {% endfor %}
+      </select>
+    </form>
+
+    {% if resultado %}
+      <div class="resultado">
+        {% if resultado.erro %}
+          <p style="color:red;">{{ resultado.erro }}</p>
+        {% else %}
+          <p><strong>Marca:</strong> {{ resultado.Marca }}</p>
+          <p><strong>Modelo:</strong> {{ resultado.Modelo }}</p>
+          <p><strong>Ano:</strong> {{ resultado.AnoModelo }}</p>
+          <p><strong>Combustível:</strong> {{ resultado.Combustivel }}</p>
+          <p><strong>Valor:</strong> {{ resultado.Valor }}</p>
+          <p><strong>Mês de Referência:</strong> {{ resultado.MesReferencia }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
+
+
+

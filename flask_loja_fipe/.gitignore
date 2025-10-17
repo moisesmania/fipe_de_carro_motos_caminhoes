@@ -1,0 +1,13 @@
+# Ambiente virtual
+venv/
+Include/
+Lib/
+Scripts/
+pyvenv.cfg
+
+# Arquivos compilados e temporários
+*.pyc
+__pycache__/
+
+# Sistema
+.DS_Store
