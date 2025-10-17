@@ -111,6 +111,5 @@ Este projeto é open source, sinta-se livre para usar e modificar conforme neces
 9. Links úteis
 API FIPE: https://deividfortuna.github.io/fipe/v2/
 
-yaml
-Copiar código
+
 
